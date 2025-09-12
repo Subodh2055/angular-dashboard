@@ -124,8 +124,23 @@
 
   .input-group-text,
   .form-control {
-    background-color: var(--bs-gray-900);
-    border-color: var(--bs-gray-700);
-    color: var(--bs-gray-100);
+    background-color: rgba(255, 255, 255, 0.25); /* light glass effect */
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #000; /* dark text for contrast */
+    backdrop-filter: blur(10px); /* glass blur */
+    border-radius: 0.75rem; /* rounded edges */
+    transition: all 0.3s ease;
+
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.35);
+      border-color: rgba(0, 0, 0, 0.2);
+      color: #000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5); /* subtle placeholder */
+    }
   }
+
 }

@@ -1,4 +1,3 @@
-<p>user-list works!</p>
 <div class="container-fluid py-4 glass-container">
   <div class="row">
     <div class="col-12">
@@ -27,21 +26,22 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-md-6">
-          <div class="input-group">
-            <span class="input-group-text">
-              <i class="bi bi-search"></i>
-            </span>
+        <div class="col-md-4">
+          <div class="position-relative">
             <input
               type="text"
-              class="form-control"
+              class="form-control form-control-sm rounded-pill ps-5 shadow-sm"
               placeholder="Search by name or email..."
               [value]="searchTerm"
               (input)="onSearch($event)"
             />
+            <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
+        <i class="bi bi-search"></i>
+      </span>
           </div>
         </div>
       </div>
+
 
       <div *ngIf="loading" class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
@@ -50,36 +50,24 @@
         <p class="mt-2 text-muted">Loading users...</p>
       </div>
 
-      <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
-        <div class="d-flex align-items-center">
-          <i class="bi bi-exclamation-triangle-fill me-2"></i>
-          <div class="flex-grow-1">
-            {{ error }}
-          </div>
-          <button class="btn btn-outline-danger btn-sm" (click)="retry()">
-            Retry
-          </button>
-        </div>
-      </div>
-
-      <div *ngIf="!loading && !error && filteredUsers.length === 0 && users.length > 0"
+      <div *ngIf="!loading && filteredUsers.length === 0 && users.length > 0"
            class="text-center py-5">
         <i class="bi bi-search display-1 text-muted"></i>
         <h4 class="mt-3">No users found</h4>
         <p class="text-muted">Try adjusting your search terms</p>
       </div>
 
-      <div *ngIf="!loading && !error && paginatedUsers.length > 0">
+      <div *ngIf="!loading && paginatedUsers.length > 0">
 
         <div class="d-flex justify-content-between align-items-center mb-3">
           <small class="text-muted">
             Showing {{ (currentPage - 1) * pageSize + 1 }} -
-            {{ Math.min(currentPage * pageSize, totalUsers) }} of {{ totalUsers }} users
+            {{ math.min(currentPage * pageSize, totalUsers) }} of {{ totalUsers }} users
             <span *ngIf="searchTerm">(filtered)</span>
           </small>
         </div>
 
-        <div *ngIf="isTableView" class="table-responsive">
+        <div *ngIf="isTableView" class="table-responsive-sm">
           <table class="table table-hover table-sm">
             <thead class="table-light">
             <tr>
@@ -167,7 +155,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="row d-flex justify-content-end py-2">
+        <div class="row  py-2">
           <app-pagination
             [page]="currentPage"
             [pageSize]="pageSize"

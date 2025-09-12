@@ -4,6 +4,7 @@ export const environment = {
   appName: 'User Dashboard',
   version: '1.0.0',
   enableLogging: false,
+  appConfigName: 'user-dashboard-config',
   cacheTimeout: 10 * 60 * 1000, // 10 minutes in milliseconds
   pageSize: 5,
   debounceTime: 300, // milliseconds for search debounce

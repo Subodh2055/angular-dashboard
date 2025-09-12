@@ -2,40 +2,52 @@ import { ObjectUtil } from './object-util';
 import { environment } from '../../../environments/environment';
 
 export class LocalStorageUtil {
-  /**
-   * @description
-   * Get an instance of LocalStorage.
-   */
-  // public static getStorage(): LocalStorage {
-  //   return ObjectUtil.isEmpty(localStorage.getItem(environment.appConfigName))
-  //     ? new LocalStorage()
-  //     : JSON.parse(
-  //         CryptoJsUtil.decrypt(localStorage.getItem(environment.appConfigName))
-  //       );
-  // }
 
   /**
-   * @param data A local storage instance to save.
-   *
-   * @description
-   * Make sure you use LocalStorageUtil.getStorage() method before
-   * to get instance of LocalStorage. Edit the instance and use
-   * LocalStorageUtil.setStorage() to set in the browser's localStorage.
+   * Get an instance of LocalStorage from browser localStorage.
+   * If nothing exists, returns a new instance.
    */
-  // public static setStorage(data: LocalStorage): void {
-  //   localStorage.setItem(
-  //   );
-  // }
-  //
-  // /**
-  //  * @description
-  //  * Passes empty JSON to clear the storage.
-  //  */
-  // public static clearStorage(): void {
-  //   LocalStorageUtil.setStorage(new LocalStorage());
-  // }
+  public static getStorage(): LocalStorage {
+    const stored = localStorage.getItem(environment.appConfigName);
+    if (ObjectUtil.isEmpty(stored)) {
+      return new LocalStorage();
+    }
+
+    try {
+      return JSON.parse(stored!) as LocalStorage;
+    } catch (error) {
+      console.error('Error parsing localStorage:', error);
+      return new LocalStorage();
+    }
+  }
+
+  /**
+   * Save LocalStorage instance to browser localStorage
+   * @param data LocalStorage object
+   */
+  public static setStorage(data: LocalStorage): void {
+    try {
+      const jsonData = JSON.stringify(data);
+      localStorage.setItem(environment.appConfigName, jsonData);
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+    }
+  }
+
+  /**
+   * Clears the stored LocalStorage by resetting to empty object
+   */
+  public static clearStorage(): void {
+    this.setStorage(new LocalStorage());
+  }
 }
 
+/**
+ * Define your LocalStorage structure here
+ */
 export class LocalStorage {
-  username: string | undefined;
+  username?: string;
+  userListLayout?: boolean; // table or card view
+  searchTerm?: string;
+  currentPage?: number;
 }
