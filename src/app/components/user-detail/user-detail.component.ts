@@ -54,9 +54,8 @@ export class UserDetailComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe({
       next: (queryParams: any) => {
         console.log('Query Params:', queryParams);
-        if (queryParams?.search) {
-          this.searchTerm = queryParams?.search;
-        }
+        this.searchTerm = queryParams['search'] || '';
+        this.commonObservableService.nextSearch(this.searchTerm);
       },
       error: (err: any) => {
         this.toastMessageService.showToastMessage(

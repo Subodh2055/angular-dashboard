@@ -41,7 +41,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   public constructor(
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private toastMessageService: ToastMessageService,
     private commonObservableService: CommonObservableService
   ) {
@@ -78,7 +78,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   // ----------------- URL & State -----------------
   initializeFromURL(): void {
-    this.route.queryParams
+    this.activatedRoute.queryParams
       .pipe(takeUntil(this.commonObservableService.destroy))
       .subscribe(params => {
         if (params['search']) {
@@ -143,8 +143,17 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   onSearch(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.commonObservableService.nextSearch(target.value);
+    const value = target.value.trim();
+
+    this.commonObservableService.nextSearch(value);
+    const queryParams = value ? { search: value } : {};
+    void this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams,
+      queryParamsHandling: '', // replace, not merge
+    });
   }
+
 
   filterUsers(searchTerm: string): void {
     if (!searchTerm.trim()) {
@@ -179,7 +188,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (this.searchTerm) queryParams.search = this.searchTerm;
     queryParams.page = this.currentPage;
 
-    this.router.navigate([], {relativeTo: this.route, queryParams, queryParamsHandling: 'merge'});
+    this.router.navigate([], {relativeTo: this.activatedRoute, queryParams, queryParamsHandling: 'merge'});
   }
 
   viewUserDetail(userId: number): void {
