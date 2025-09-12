@@ -16,8 +16,8 @@
           <h4 class="mb-0">Detail of {{ user?.name }}</h4>
           <span class="badge bg-primary">{{ user?.id }}</span>
         </div>
-
-        <div class="mb-3">
+<div class="row">
+        <div class="mb-3 col-sm-6">
           <p class="text-muted mb-1"><strong>Username:</strong> {{ user?.username }}</p>
           <p class="text-muted mb-1"><i class="bi bi-envelope me-2"></i>{{ user?.email }}</p>
           <p class="text-muted mb-1"><i class="bi bi-telephone me-2"></i>{{ user?.phone }}</p>
@@ -27,7 +27,7 @@
           </p>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 col-sm-6" >
           <h5>Address</h5>
           <p class="text-muted mb-1">{{ user?.address?.street }}, {{ user?.address?.suite }}</p>
           <p class="text-muted mb-1">{{ user?.address?.city }} - {{ user?.address?.zipcode }}</p>
@@ -36,12 +36,13 @@
           </p>
         </div>
 
-        <div>
+        <div class="mb-3 col-sm-6">
           <h5>Company</h5>
           <p class="text-muted mb-1"><strong>Name:</strong> {{ user?.company?.name }}</p>
           <p class="text-muted mb-1"><strong>Catch Phrase:</strong> {{ user?.company?.catchPhrase }}</p>
           <p class="text-muted mb-1"><strong>BS:</strong> {{ user?.company?.bs }}</p>
         </div>
+</div>
       </div>
 
     </div>

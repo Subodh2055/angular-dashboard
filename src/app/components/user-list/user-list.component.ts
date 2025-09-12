@@ -127,7 +127,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.filterUsers(this.searchTerm);
         this.loading = false;
 
-        this.toastMessageService.showToastMessage(new Alert(AlertType.SUCCESS), 'Users loaded successfully');
+        this.toastMessageService.showToastMessage(new Alert(AlertType.SUCCESS), `User's list loaded successfully`);
       },
       error: (err: any) => {
         this.loading = false;
