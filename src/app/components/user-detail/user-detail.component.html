@@ -1,1 +1,49 @@
-<p>user-detail works!</p>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div class="mb-3">
+        <span class="cursor-pointer px-1" (click)="goBack()">
+          <i class="bi bi-arrow-left me-2"></i> Back
+          </span>
+      </div>
+      <div *ngIf="loading" class="text-center my-5">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+
+      <div *ngIf="!loading && user" class="card glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">Detail of {{ user?.name }}</h4>
+          <span class="badge bg-primary">{{ user?.id }}</span>
+        </div>
+
+        <div class="mb-3">
+          <p class="text-muted mb-1"><strong>Username:</strong> {{ user?.username }}</p>
+          <p class="text-muted mb-1"><i class="bi bi-envelope me-2"></i>{{ user?.email }}</p>
+          <p class="text-muted mb-1"><i class="bi bi-telephone me-2"></i>{{ user?.phone }}</p>
+          <p class="text-muted mb-1">
+            <i class="bi bi-globe me-2"></i>
+            <a href="https://{{ user?.website }}" target="_blank">{{ user?.website }}</a>
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <h5>Address</h5>
+          <p class="text-muted mb-1">{{ user?.address?.street }}, {{ user?.address?.suite }}</p>
+          <p class="text-muted mb-1">{{ user?.address?.city }} - {{ user?.address?.zipcode }}</p>
+          <p class="text-muted mb-1">
+            <small class="text-secondary">Lat: {{ user?.address?.geo?.lat }}, Lng: {{ user?.address?.geo?.lng }}</small>
+          </p>
+        </div>
+
+        <div>
+          <h5>Company</h5>
+          <p class="text-muted mb-1"><strong>Name:</strong> {{ user?.company?.name }}</p>
+          <p class="text-muted mb-1"><strong>Catch Phrase:</strong> {{ user?.company?.catchPhrase }}</p>
+          <p class="text-muted mb-1"><strong>BS:</strong> {{ user?.company?.bs }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

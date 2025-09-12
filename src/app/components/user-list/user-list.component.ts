@@ -10,13 +10,15 @@ import {ToastMessageService} from "../../services/toast-message.service";
 import {Alert, AlertType} from "../../models/alert";
 import {LocalStorage, LocalStorageUtil} from "../../shared/utill/local-storage-util";
 import {CommonObservableService} from "../../shared/common-observable.service";
+import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 
 @Component({
   imports: [
     NgIf,
     NgForOf,
     FormsModule,
-    PaginationComponent
+    PaginationComponent,
+    LoadingSpinnerComponent
   ],
   selector: 'app-user-list',
   standalone: true,
@@ -36,7 +38,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   loading = false;
   math = Math;
 
-  constructor(
+  public constructor(
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
