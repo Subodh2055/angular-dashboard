@@ -6,6 +6,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {provideRouter} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import '@angular/localize/init';
 
 bootstrapApplication(AppComponent, {
   providers: [
