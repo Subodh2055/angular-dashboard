@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist/angular-dashboard",
+  "installCommand": "npm ci"
+}
