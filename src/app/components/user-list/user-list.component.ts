@@ -1,24 +1,26 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
-import {NgForOf, NgIf} from '@angular/common';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
-import {UserService} from '../../services/user.service';
-import {UserModel} from "../../models/user.model";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { NgForOf, NgIf } from '@angular/common';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
+import { UserModel } from '../../models/user.model';
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
 
 @Component({
-  selector: 'app-user-list',
-  standalone: true,
   imports: [
     NgbPagination,
     NgIf,
     NgForOf,
-    FormsModule
+    FormsModule,
+    PaginationComponent
   ],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  selector: 'app-user-list',
+  standalone: true,
+  styleUrls: ['./user-list.component.scss'],
+  templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -33,7 +35,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   totalUsers = 0;
 
   searchTerm = '';
-
   isTableView = true;
   loading = false;
   error = '';
@@ -43,8 +44,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initializeFromURL();
@@ -58,39 +58,26 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  /**
-   * Initialize component state from URL parameters
-   */
+  // ----------------- URL & State -----------------
   private initializeFromURL(): void {
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      if (params['search']) {
-        this.searchTerm = params['search'];
-        this.searchSubject.next(this.searchTerm);
-      }
-      if (params['page']) {
-        this.currentPage = +params['page'];
-      }
+      this.searchTerm = params['search'] || '';
+      this.searchSubject.next(this.searchTerm);
+
+      this.currentPage = params['page'] ? +params['page'] : 1;
+      this.updatePagination();
     });
   }
 
-  /**
-   * Load layout preference from localStorage
-   */
   private loadLayoutPreference(): void {
     const savedLayout = localStorage.getItem('userListLayout');
     this.isTableView = savedLayout === 'false' ? false : true;
   }
 
-  /**
-   * Save layout preference to localStorage
-   */
   saveLayoutPreference(): void {
     localStorage.setItem('userListLayout', this.isTableView.toString());
   }
 
-  /**
-   * Setup search with debouncing
-   */
   private setupSearch(): void {
     this.searchSubject.pipe(
       debounceTime(300),
@@ -102,16 +89,13 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Fetch users from API
-   */
+  // ----------------- API & Filtering -----------------
   getUserList(): void {
     this.loading = true;
     this.error = '';
 
     this.userService.getAllUsers().subscribe({
       next: (response: UserModel[]) => {
-        console.log('Users loaded:', response);
         this.users = response;
         this.filterUsers(this.searchTerm);
         this.loading = false;
@@ -120,25 +104,16 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.error = 'Failed to load users. Please try again.';
         this.loading = false;
         console.error('Error fetching users:', err);
-      },
-      complete: () => {
-        console.log('User loading completed');
       }
     });
   }
 
-  /**
-   * Handle search input
-   */
   onSearch(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchTerm = target.value;
     this.searchSubject.next(this.searchTerm);
   }
 
-  /**
-   * Filter users based on search term
-   */
   private filterUsers(searchTerm: string): void {
     if (!searchTerm.trim()) {
       this.filteredUsers = [...this.users];
@@ -151,49 +126,26 @@ export class UserListComponent implements OnInit, OnDestroy {
     }
 
     this.totalUsers = this.filteredUsers.length;
-    this.currentPage = 1; // Reset to first page when filtering
+    if (this.currentPage > this.totalPages) this.currentPage = 1;
     this.updatePagination();
   }
 
-  /**
-   * Update pagination based on current page and filtered results
-   */
   private updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
   }
 
-  /**
-   * Handle page change event
-   */
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updatePagination();
     this.updateURL();
   }
 
-  /**
-   * Navigate to user detail page
-   */
-  viewUserDetail(userId: number): void {
-    const queryParams = this.searchTerm ? {search: this.searchTerm} : {};
-    this.router.navigate(['/user', userId], {queryParams});
-  }
-
-  /**
-   * Update URL with current search and pagination state
-   */
   private updateURL(): void {
     const queryParams: any = {};
-
-    if (this.searchTerm) {
-      queryParams.search = this.searchTerm;
-    }
-
-    if (this.currentPage > 1) {
-      queryParams.page = this.currentPage;
-    }
+    if (this.searchTerm) queryParams.search = this.searchTerm;
+    queryParams.page = this.currentPage; // always include page
 
     this.router.navigate([], {
       relativeTo: this.route,
@@ -202,16 +154,15 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Get total number of pages
-   */
+  viewUserDetail(userId: number): void {
+    const queryParams = this.searchTerm ? { search: this.searchTerm } : {};
+    this.router.navigate(['/user', userId], { queryParams });
+  }
+
   get totalPages(): number {
     return Math.ceil(this.totalUsers / this.pageSize);
   }
 
-  /**
-   * Retry loading users after error
-   */
   retry(): void {
     this.getUserList();
   }

@@ -1,0 +1,13 @@
+<nav aria-label="Pagination" *ngIf="totalPages > 1">
+  <ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="collectionSize"
+    [maxSize]="maxSize"
+    [rotate]="true"
+    [boundaryLinks]="true"
+    [directionLinks]="true"
+    (pageChange)="onPageChange($event)"
+    class="justify-content-center">
+  </ngb-pagination>
+</nav>

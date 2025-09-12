@@ -1,12 +1,10 @@
 <p>user-list works!</p>
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 glass-container">
   <div class="row">
     <div class="col-12">
-      <!-- Header -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Users Directory</h2>
         <div class="d-flex gap-2">
-          <!-- Layout Toggle -->
           <div class="btn-group" role="group" aria-label="Layout toggle">
             <button
               type="button"
@@ -28,7 +26,6 @@
         </div>
       </div>
 
-      <!-- Search Bar -->
       <div class="row mb-4">
         <div class="col-md-6">
           <div class="input-group">
@@ -46,7 +43,6 @@
         </div>
       </div>
 
-      <!-- Loading State -->
       <div *ngIf="loading" class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -54,7 +50,6 @@
         <p class="mt-2 text-muted">Loading users...</p>
       </div>
 
-      <!-- Error State -->
       <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
         <div class="d-flex align-items-center">
           <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -67,7 +62,6 @@
         </div>
       </div>
 
-      <!-- No Results -->
       <div *ngIf="!loading && !error && filteredUsers.length === 0 && users.length > 0"
            class="text-center py-5">
         <i class="bi bi-search display-1 text-muted"></i>
@@ -75,10 +69,8 @@
         <p class="text-muted">Try adjusting your search terms</p>
       </div>
 
-      <!-- Users Content -->
       <div *ngIf="!loading && !error && paginatedUsers.length > 0">
 
-        <!-- Results Info -->
         <div class="d-flex justify-content-between align-items-center mb-3">
           <small class="text-muted">
             Showing {{ (currentPage - 1) * pageSize + 1 }} -
@@ -87,9 +79,8 @@
           </small>
         </div>
 
-        <!-- Table View -->
         <div *ngIf="isTableView" class="table-responsive">
-          <table class="table table-hover">
+          <table class="table table-hover table-sm">
             <thead class="table-light">
             <tr>
               <th scope="col">Name</th>
@@ -126,7 +117,6 @@
           </table>
         </div>
 
-        <!-- Card View -->
         <div *ngIf="!isTableView" class="row g-3">
           <div *ngFor="let user of paginatedUsers" class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm cursor-pointer"
@@ -177,20 +167,15 @@
         </div>
 
         <!-- Pagination -->
-        <nav aria-label="Users pagination" class="mt-4" *ngIf="totalPages > 1">
-          <ngb-pagination
-            [(page)]="currentPage"
+        <div class="row d-flex justify-content-end py-2">
+          <app-pagination
+            [page]="currentPage"
             [pageSize]="pageSize"
             [collectionSize]="totalUsers"
             [maxSize]="5"
-            [rotate]="true"
-            [boundaryLinks]="true"
-            [directionLinks]="true"
-            (pageChange)="onPageChange($event)"
-            class="justify-content-center">
-          </ngb-pagination>
-        </nav>
-
+            (pageChange)="onPageChange($event)">
+          </app-pagination>
+        </div>
       </div>
     </div>
   </div>
