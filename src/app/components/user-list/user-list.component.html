@@ -1,167 +1,169 @@
-<div class="container-fluid py-4 glass-container">
-  <div class="row">
-    <div class="col-12">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Users Directory</h2>
-        <div class="d-flex gap-2">
-          <div class="btn-group" role="group" aria-label="Layout toggle">
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              [class.active]="isTableView"
-              (click)="isTableView = true; saveLayoutPreference()"
-              title="Table View">
-              <i class="bi bi-table"></i>
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              [class.active]="!isTableView"
-              (click)="isTableView = false; saveLayoutPreference()"
-              title="Card View">
-              <i class="bi bi-grid-3x3-gap"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-4">
-        <div class="col-md-4">
-          <div class="position-relative">
-            <input
-              type="text"
-              class="form-control form-control-sm rounded-pill ps-5 shadow-sm"
-              placeholder="Search by name or email..."
-              [value]="searchTerm"
-              (input)="onSearch($event)"
-            />
-            <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-        <i class="bi bi-search"></i>
-      </span>
-          </div>
-        </div>
-      </div>
-
-
-      <div *ngIf="loading" class="text-center my-5">
-        <app-loading-spinner></app-loading-spinner>
-      </div>
-
-      <div *ngIf="!loading && filteredUsers.length === 0 && users.length > 0"
-           class="text-center py-5">
-        <i class="bi bi-search display-1 text-muted"></i>
-        <h4 class="mt-3">No users found</h4>
-        <p class="text-muted">Try adjusting your search terms</p>
-      </div>
-
-      <div *ngIf="!loading && paginatedUsers.length > 0">
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <small class="text-muted">
-            Showing {{ (currentPage - 1) * pageSize + 1 }} -
-            {{ math.min(currentPage * pageSize, totalUsers) }} of {{ totalUsers }} users
-            <span *ngIf="searchTerm">(filtered)</span>
-          </small>
-        </div>
-
-        <div *ngIf="isTableView" class="table-responsive-sm">
-          <table class="table table-hover table-sm">
-            <thead class="table-light">
-            <tr class="bg-primary">
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col" class="d-none d-md-table-cell">Phone</th>
-              <th scope="col" class="d-none d-lg-table-cell">Company</th>
-              <th scope="col" class="d-none d-lg-table-cell">City</th>
-              <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of paginatedUsers"
-                class="cursor-pointer"
-                (click)="viewUserDetail(user.id)">
-              <td>
-                <div>
-                  <strong>{{ user.name }}</strong>
-                  <br>
-                  <small class="text-muted">{{ user.username }}</small>
-                </div>
-              </td>
-              <td>{{ user.email }}</td>
-              <td class="d-none d-md-table-cell">{{ user.phone }}</td>
-              <td class="d-none d-lg-table-cell">{{ user.company?.name }}</td>
-              <td class="d-none d-lg-table-cell">{{ user.address?.city }}</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary"
-                        (click)="$event.stopPropagation(); viewUserDetail(user.id)">
-                  View Details
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="!isTableView" class="row g-3">
-          <div *ngFor="let user of paginatedUsers" class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm cursor-pointer"
-                 (click)="viewUserDetail(user.id)">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-1">{{ user.name }}</h5>
-                  <span class="badge bg-primary">{{ user.id }}</span>
-                </div>
-                <p class="card-text text-muted small mb-2">{{ user.username }}</p>
-
-                <div class="mb-2">
-                  <small class="text-muted">
-                    <i class="bi bi-envelope me-1"></i>
-                    {{ user.email }}
-                  </small>
-                </div>
-
-                <div class="mb-2">
-                  <small class="text-muted">
-                    <i class="bi bi-telephone me-1"></i>
-                    {{ user.phone }}
-                  </small>
-                </div>
-
-                <div class="mb-3">
-                  <small class="text-muted">
-                    <i class="bi bi-building me-1"></i>
-                    {{ user.company?.name }}
-                  </small>
-                </div>
-
-                <div class="mb-3">
-                  <small class="text-muted">
-                    <i class="bi bi-geo-alt me-1"></i>
-                    {{ user.address?.city }}
-                  </small>
-                </div>
-              </div>
-              <div class="card-footer bg-transparent">
-                <button class="btn btn-primary btn-sm w-100"
-                        (click)="$event.stopPropagation(); viewUserDetail(user.id)">
-                  View Full Profile
-                </button>
-              </div>
+<ng-container class="p-2">
+  <div class="container-fluid py-4 glass-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="mb-0 px-1">Users Directory</h2>
+          <div class="d-flex gap-2">
+            <div class="btn-group" role="group" aria-label="Layout toggle">
+              <button
+                type="button"
+                class="btn btn-outline-primary me-1"
+                [class.active]="isTableView"
+                (click)="isTableView = true; saveLayoutPreference()"
+                title="Table View">
+                <i class="bi bi-table"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                [class.active]="!isTableView"
+                (click)="isTableView = false; saveLayoutPreference()"
+                title="Card View">
+                <i class="bi bi-grid-3x3-gap"></i>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Pagination -->
-        <div class="row  py-2">
-          <app-pagination
-            [page]="currentPage"
-            [pageSize]="pageSize"
-            [collectionSize]="totalUsers"
-            [maxSize]="5"
-            (pageChange)="onPageChange($event)">
-          </app-pagination>
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <div class="position-relative">
+              <input
+                type="text"
+                class="form-control form-control-sm rounded-pill ps-5 shadow-sm"
+                placeholder="Search by name or email..."
+                [value]="searchTerm"
+                (input)="onSearch($event)"
+              />
+              <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
+        <i class="bi bi-search"></i>
+      </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="loading" class="text-center my-5">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <div *ngIf="!loading && filteredUsers.length === 0 && users.length > 0"
+             class="text-center py-5">
+          <i class="bi bi-search display-1 text-muted"></i>
+          <h4 class="mt-3">No users found</h4>
+          <p class="text-muted">Try adjusting your search terms</p>
+        </div>
+
+        <div *ngIf="!loading && paginatedUsers.length > 0">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <small class="text-muted">
+              Showing {{ (currentPage - 1) * pageSize + 1 }} -
+              {{ math.min(currentPage * pageSize, totalUsers) }} of {{ totalUsers }} users
+              <span *ngIf="searchTerm">(filtered)</span>
+            </small>
+          </div>
+
+          <div *ngIf="isTableView" class="table-responsive">
+            <table class="table table-hover table-sm table-bordered">
+              <thead class="table-light">
+              <tr class="bg-primary">
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" class="d-none d-md-table-cell">Phone</th>
+                <th scope="col" class="d-none d-lg-table-cell">Company</th>
+                <th scope="col" class="d-none d-lg-table-cell">City</th>
+                <th scope="col">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of paginatedUsers"
+                  class="cursor-pointer"
+                  (click)="viewUserDetail(user.id)">
+                <td>
+                  <div>
+                    <strong>{{ user.name }}</strong>
+                    <br>
+                    <small class="text-muted">{{ user.username }}</small>
+                  </div>
+                </td>
+                <td>{{ user.email }}</td>
+                <td class="d-none d-md-table-cell">{{ user.phone }}</td>
+                <td class="d-none d-lg-table-cell">{{ user.company?.name }}</td>
+                <td class="d-none d-lg-table-cell">{{ user.address?.city }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary"
+                          (click)="$event.stopPropagation(); viewUserDetail(user.id)">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="!isTableView" class="row g-3">
+            <div *ngFor="let user of paginatedUsers" class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm cursor-pointer"
+                   (click)="viewUserDetail(user.id)">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-1">{{ user.name }}</h5>
+                    <span class="badge bg-primary">{{ user.id }}</span>
+                  </div>
+                  <p class="card-text text-muted small mb-2">{{ user.username }}</p>
+
+                  <div class="mb-2">
+                    <small class="text-muted">
+                      <i class="bi bi-envelope me-1"></i>
+                      {{ user.email }}
+                    </small>
+                  </div>
+
+                  <div class="mb-2">
+                    <small class="text-muted">
+                      <i class="bi bi-telephone me-1"></i>
+                      {{ user.phone }}
+                    </small>
+                  </div>
+
+                  <div class="mb-3">
+                    <small class="text-muted">
+                      <i class="bi bi-building me-1"></i>
+                      {{ user.company?.name }}
+                    </small>
+                  </div>
+
+                  <div class="mb-3">
+                    <small class="text-muted">
+                      <i class="bi bi-geo-alt me-1"></i>
+                      {{ user.address?.city }}
+                    </small>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <button class="btn btn-primary btn-sm w-100"
+                          (click)="$event.stopPropagation(); viewUserDetail(user.id)">
+                    View Full Profile
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="row  py-2">
+            <app-pagination
+              [page]="currentPage"
+              [pageSize]="pageSize"
+              [collectionSize]="totalUsers"
+              [maxSize]="5"
+              (pageChange)="onPageChange($event)">
+            </app-pagination>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>

@@ -17,3 +17,23 @@
     transform: translateY(-2px);
   }
 }
+@media (max-width: 576px) {
+  .container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .table {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+@media (max-width: 576px) {
+  .col-12.col-sm-6.col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
