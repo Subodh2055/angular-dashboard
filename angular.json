@@ -44,7 +44,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
                 {
@@ -53,6 +52,14 @@
                   "maximumError": "1mb"
                 }
               ]
+            },
+            "development": {
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
@@ -62,9 +69,6 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-dashboard:build:production"
-            },
-            "staging": {
-              "buildTarget": "angular-dashboard:build:staging"
             },
             "development": {
               "buildTarget": "angular-dashboard:build:development"
