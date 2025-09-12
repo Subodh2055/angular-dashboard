@@ -5,6 +5,7 @@
     background-color: var(--bs-gray-50);
   }
 }
+
 .cursor-pointer {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
@@ -17,6 +18,7 @@
     transform: translateY(-2px);
   }
 }
+
 @media (max-width: 576px) {
   .container-fluid {
     padding-left: 0.5rem;
@@ -27,6 +29,7 @@
     padding-right: 0px;
   }
 }
+
 @media (max-width: 576px) {
   .col-12.col-sm-6.col-md-4 {
     flex: 0 0 100%;
