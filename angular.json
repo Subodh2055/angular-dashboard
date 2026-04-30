@@ -5,14 +5,14 @@
   "projects": {
     "angular-dashboard": {
       "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -20,20 +20,14 @@
             "outputPath": "dist/angular-dashboard",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -47,8 +41,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1.5mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "700kb",
+                  "maximumError": "1mb"
                 }
               ]
             },
@@ -57,8 +51,7 @@
               "outputHashing": "none",
               "sourceMap": true,
               "namedChunks": true,
-              "extractLicenses": false,
-
+              "extractLicenses": false
             }
           },
           "defaultConfiguration": "production"
@@ -84,21 +77,14 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -106,17 +92,13 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"],
-    "analytics": "3d8ce155-6ea3-4a3b-9d44-606a13a650fc"
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }
