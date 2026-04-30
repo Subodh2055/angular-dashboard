@@ -58,7 +58,7 @@
               "sourceMap": true,
               "namedChunks": true,
               "extractLicenses": false,
-              "buildOptimizer": false
+
             }
           },
           "defaultConfiguration": "production"

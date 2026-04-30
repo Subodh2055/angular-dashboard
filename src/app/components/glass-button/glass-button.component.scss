@@ -1,0 +1,8 @@
+/* Reusable glass button styles are managed globally in src/assets/_glass.scss */
+:host {
+  display: inline-block;
+  &.block {
+    display: block;
+    width: 100%;
+  }
+}

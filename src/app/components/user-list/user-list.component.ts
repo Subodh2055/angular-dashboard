@@ -1,16 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgForOf, NgIf} from '@angular/common';
-import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
-import {UserService} from '../../services/user.service';
-import {UserModel} from '../../models/user.model';
-import {PaginationComponent} from '../../shared/pagination/pagination.component';
-import {ToastMessageService} from "../../services/toast-message.service";
-import {Alert, AlertType} from "../../models/alert";
-import {LocalStorage, LocalStorageUtil} from "../../shared/utill/local-storage-util";
-import {CommonObservableService} from "../../shared/common-observable.service";
-import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForOf, NgIf } from '@angular/common';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
+import { UserModel } from '../../models/user.model';
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { ToastMessageService } from '../../services/toast-message.service';
+import { Alert, AlertType } from '../../models/alert';
+import {
+  LocalStorage,
+  LocalStorageUtil,
+} from '../../shared/utill/local-storage-util';
+import { CommonObservableService } from '../../shared/common-observable.service';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { GlassButtonComponent } from '../glass-button/glass-button.component';
+import { GlassCardComponent } from '../glass-card/glass-card.component';
+import { GlassBadgeComponent } from '../glass-badge/glass-badge.component';
+import { GlassInputComponent } from '../glass-input/glass-input.component';
+import { GlassAlertComponent } from '../glass-alert/glass-alert.component';
 
 @Component({
   imports: [
@@ -18,15 +26,19 @@ import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spin
     NgForOf,
     FormsModule,
     PaginationComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    GlassButtonComponent,
+    GlassCardComponent,
+    GlassBadgeComponent,
+    GlassInputComponent,
+    GlassAlertComponent,
   ],
   selector: 'app-user-list',
   standalone: true,
   styleUrls: ['./user-list.component.scss'],
-  templateUrl: './user-list.component.html'
+  templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit, OnDestroy {
-
   users: UserModel[] = [];
   filteredUsers: UserModel[] = [];
   paginatedUsers: UserModel[] = [];
@@ -43,9 +55,8 @@ export class UserListComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toastMessageService: ToastMessageService,
-    private commonObservableService: CommonObservableService
-  ) {
-  }
+    private commonObservableService: CommonObservableService,
+  ) {}
 
   ngOnInit(): void {
     this.loadFromLocalStorage();
@@ -80,7 +91,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   initializeFromURL(): void {
     this.activatedRoute.queryParams
       .pipe(takeUntil(this.commonObservableService.destroy))
-      .subscribe(params => {
+      .subscribe((params) => {
         if (params['search']) {
           this.searchTerm = params['search'];
           this.commonObservableService.nextSearch(this.searchTerm);
@@ -95,11 +106,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   setupSearch(): void {
-    this.commonObservableService.getSearchObservable()
+    this.commonObservableService
+      .getSearchObservable()
       .pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        takeUntil(this.commonObservableService.destroy)
+        takeUntil(this.commonObservableService.destroy),
       )
       .subscribe({
         next: (searchTerm: string) => {
@@ -113,10 +125,9 @@ export class UserListComponent implements OnInit, OnDestroy {
         },
         complete: () => {
           console.log('Search observable completed');
-        }
+        },
       });
   }
-
 
   getUserList(): void {
     this.loading = true;
@@ -127,26 +138,33 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.filterUsers(this.searchTerm);
         this.loading = false;
 
-        this.toastMessageService.showToastMessage(new Alert(AlertType.SUCCESS), `User's list loaded successfully`);
+        this.toastMessageService.showToastMessage(
+          new Alert(AlertType.SUCCESS),
+          `User's list loaded successfully`,
+        );
       },
       error: (err: any) => {
         this.loading = false;
 
         this.toastMessageService.showToastMessage(
-          new Alert(AlertType.ERROR), err?.error?.message || 'Failed to load users'
+          new Alert(AlertType.ERROR),
+          err?.error?.message || 'Failed to load users',
         );
 
         console.error('Error fetching users:', err);
-      }
+      },
     });
   }
 
   onSearch(event: Event): void {
     const target = event.target as HTMLInputElement;
-    const value = target.value.trim();
+    this.onSearchFromComponent(target.value);
+  }
 
-    this.commonObservableService.nextSearch(value);
-    const queryParams = value ? { search: value } : {};
+  onSearchFromComponent(value: string): void {
+    const term = value.trim();
+    this.commonObservableService.nextSearch(term);
+    const queryParams = term ? { search: term } : {};
     void this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams,
@@ -154,15 +172,15 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   }
 
-
   filterUsers(searchTerm: string): void {
     if (!searchTerm.trim()) {
       this.filteredUsers = [...this.users];
     } else {
       const term = searchTerm.toLowerCase().trim();
-      this.filteredUsers = this.users.filter(user =>
-        user.name.toLowerCase().includes(term) ||
-        user.email.toLowerCase().includes(term)
+      this.filteredUsers = this.users.filter(
+        (user) =>
+          user.name.toLowerCase().includes(term) ||
+          user.email.toLowerCase().includes(term),
       );
     }
     this.totalUsers = this.filteredUsers.length;
@@ -188,16 +206,19 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (this.searchTerm) queryParams.search = this.searchTerm;
     queryParams.page = this.currentPage;
 
-    this.router.navigate([], {relativeTo: this.activatedRoute, queryParams, queryParamsHandling: 'merge'});
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams,
+      queryParamsHandling: 'merge',
+    });
   }
 
   viewUserDetail(userId: number): void {
-    const queryParams = this.searchTerm ? {search: this.searchTerm} : {};
-    this.router.navigate(['/user', userId], {queryParams});
+    const queryParams = this.searchTerm ? { search: this.searchTerm } : {};
+    this.router.navigate(['/user', userId], { queryParams });
   }
 
   get totalPages(): number {
     return Math.ceil(this.totalUsers / this.pageSize);
   }
-
 }

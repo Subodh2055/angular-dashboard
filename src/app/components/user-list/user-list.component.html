@@ -5,10 +5,10 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0 px-1">Users Directory</h2>
           <div class="d-flex gap-2">
-            <div class="btn-group" role="group" aria-label="Layout toggle">
+            <div class="d-flex gap-2">
               <button
                 type="button"
-                class="btn btn-outline-primary me-1"
+                class="glass-btn glass-btn-sm glass-btn-ghost me-1"
                 [class.active]="isTableView"
                 (click)="isTableView = true; saveLayoutPreference()"
                 title="Table View">
@@ -16,7 +16,7 @@
               </button>
               <button
                 type="button"
-                class="btn btn-outline-primary"
+                class="glass-btn glass-btn-sm glass-btn-ghost"
                 [class.active]="!isTableView"
                 (click)="isTableView = false; saveLayoutPreference()"
                 title="Card View">
@@ -28,18 +28,13 @@
 
         <div class="row mb-4">
           <div class="col-md-4">
-            <div class="position-relative">
-              <input
-                type="text"
-                class="form-control form-control-sm rounded-pill ps-5 shadow-sm"
-                placeholder="Search by name or email..."
-                [value]="searchTerm"
-                (input)="onSearch($event)"
-              />
-              <span class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-        <i class="bi bi-search"></i>
-      </span>
-            </div>
+            <app-glass-input
+              [rounded]="true"
+              icon="bi bi-search"
+              placeholder="Search users..."
+              [ngModel]="searchTerm"
+              (ngModelChange)="onSearchFromComponent($event)">
+            </app-glass-input>
           </div>
         </div>
 
@@ -65,10 +60,10 @@
             </small>
           </div>
 
-          <div *ngIf="isTableView" class="table-responsive">
-            <table class="table table-hover table-sm table-bordered">
-              <thead class="table-light">
-              <tr class="bg-primary">
+          <div *ngIf="isTableView" class="glass-table-wrap glass-animate">
+            <table class="glass-table">
+              <thead>
+                <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col" class="d-none d-md-table-cell">Phone</th>
@@ -93,7 +88,7 @@
                 <td class="d-none d-lg-table-cell">{{ user.company?.name }}</td>
                 <td class="d-none d-lg-table-cell">{{ user.address?.city }}</td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary"
+                  <button class="glass-btn glass-btn-sm glass-btn-outline"
                           (click)="$event.stopPropagation(); viewUserDetail(user.id)">
                     View Details
                   </button>
@@ -105,12 +100,12 @@
 
           <div *ngIf="!isTableView" class="row g-3">
             <div *ngFor="let user of paginatedUsers" class="col-md-6 col-lg-4">
-              <div class="card h-100 shadow-sm cursor-pointer"
+              <div class="glass-card h-100 cursor-pointer glass-animate"
                    (click)="viewUserDetail(user.id)">
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="card-title mb-1">{{ user.name }}</h5>
-                    <span class="badge bg-primary">{{ user.id }}</span>
+                    <span class="glass-badge glass-badge-primary">ID: {{ user.id }}</span>
                   </div>
                   <p class="card-text text-muted small mb-2">{{ user.username }}</p>
 
@@ -143,7 +138,7 @@
                   </div>
                 </div>
                 <div class="card-footer bg-transparent">
-                  <button class="btn btn-primary btn-sm w-100"
+                  <button class="glass-btn glass-btn-sm glass-btn-outline glass-btn-block"
                           (click)="$event.stopPropagation(); viewUserDetail(user.id)">
                     View Full Profile
                   </button>
@@ -161,6 +156,93 @@
               [maxSize]="5"
               (pageChange)="onPageChange($event)">
             </app-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Button Showcase Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="glass-card p-4 glass-animate glass-animate-5">
+          <h3 class="glass-h4 mb-4 glass-gradient-text">NexBodh Component Showcase</h3>
+          
+          <div class="mb-5">
+            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Reusable Angular Components</h5>
+            
+            <div class="mb-4">
+              <h6 class="glass-text-xs text-muted mb-2">BUTTONS</h6>
+              <div class="d-flex flex-wrap gap-3">
+                <app-glass-button variant="primary" [animate]="true">Primary</app-glass-button>
+                <app-glass-button variant="success">Success</app-glass-button>
+                <app-glass-button variant="warning">Warning</app-glass-button>
+                <app-glass-button variant="error">Danger</app-glass-button>
+                <app-glass-button variant="outline" size="sm">Small Outline</app-glass-button>
+                <app-glass-button variant="ghost" [iconOnly]="true"><i class="bi bi-gear-fill"></i></app-glass-button>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="glass-text-xs text-muted mb-2">BADGES</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <app-glass-badge variant="primary">Primary</app-glass-badge>
+                <app-glass-badge variant="success" [pill]="true">Success Pill</app-glass-badge>
+                <app-glass-badge variant="warning">Warning</app-glass-badge>
+                <app-glass-badge variant="error">Error</app-glass-badge>
+                <app-glass-badge variant="info">Info</app-glass-badge>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="glass-text-xs text-muted mb-2">ALERTS</h6>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <app-glass-alert variant="success" title="Success!" icon="bi bi-check-circle-fill">
+                    Your changes have been saved.
+                  </app-glass-alert>
+                </div>
+                <div class="col-md-6">
+                  <app-glass-alert variant="info" title="Note" icon="bi bi-info-circle-fill">
+                    New dashboard theme is active.
+                  </app-glass-alert>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Glass Cards</h5>
+            <div class="row g-4">
+              <div class="col-md-4">
+                <app-glass-card [elevated]="true" glow="primary">
+                  <h6 class="glass-h6">Elevated Card</h6>
+                  <p class="glass-text-sm text-muted">With primary glow and elevated depth.</p>
+                </app-glass-card>
+              </div>
+              <div class="col-md-4">
+                <app-glass-card [compact]="true">
+                  <h6 class="glass-h6">Compact Card</h6>
+                  <p class="glass-text-sm text-muted">Less padding for tighter layouts.</p>
+                </app-glass-card>
+              </div>
+              <div class="col-md-4">
+                <app-glass-card [animate]="true" [animationDelay]="3">
+                  <h6 class="glass-h6">Animated Card</h6>
+                  <p class="glass-text-sm text-muted">Smooth fade-in animation on load.</p>
+                </app-glass-card>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Direct CSS Classes</h5>
+            <div class="d-flex flex-wrap gap-3">
+              <button class="glass-btn glass-animate">Animated Primary</button>
+              <button class="glass-btn glass-btn-lg glass-glow-primary">Glowing Large</button>
+              <button class="glass-btn glass-btn-outline">Outline CSS</button>
+              <span class="glass-badge glass-badge-info">Info Badge</span>
+              <span class="glass-badge glass-badge-success">Success Badge</span>
+            </div>
           </div>
         </div>
       </div>

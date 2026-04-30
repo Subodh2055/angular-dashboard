@@ -19,6 +19,11 @@ export const routes: Routes = [
     title: 'User Details - Dashboard'
   },
   {
+    path: 'showcase',
+    loadComponent: () => import('./components/style-showcase/style-showcase.component').then(m => m.StyleShowcaseComponent),
+    title: 'Design System - NexBodh'
+  },
+  {
     path: '**',
     redirectTo: '/users'
   }

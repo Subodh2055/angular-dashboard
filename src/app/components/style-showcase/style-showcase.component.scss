@@ -1,0 +1,51 @@
+/* Code Block Styling */
+.glass-code-block {
+  background: rgba(26, 26, 46, 0.04);
+  border: 1px solid rgba(0, 102, 255, 0.08);
+  border-radius: calc(var(--glass-radius) * 0.5);
+  padding: 1.25rem;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-code-block pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.825rem;
+  color: var(--glass-text-secondary);
+  line-height: 1.6;
+}
+
+.glass-code-block::before {
+  content: "HTML";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: rgba(0, 102, 255, 0.10);
+  color: var(--glass-primary);
+  border-bottom-left-radius: 6px;
+  letter-spacing: 1px;
+}
+
+/* Sidebar Fixes */
+.glass-sidebar {
+  position: sticky;
+  top: 100px;
+  height: auto;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.glass-avatar-group {
+  margin-left: 0.6rem; /* Offset for first child group logic in SCSS */
+}
+
+/* Fix for spacing in showcase */
+.glass-h6.uppercase {
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+}

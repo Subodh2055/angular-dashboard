@@ -1,0 +1,156 @@
+<div class="glass-container py-5 glass-animate">
+  <!-- Header Section -->
+  <div class="mb-5 text-center">
+    <h1 class="glass-h1 glass-gradient-text mb-2">NexBodh Ultimate Style Guide</h1>
+    <p class="glass-text-lg glass-text-secondary">Explore components and copy the source code to use them in your projects.</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Sidebar Navigation -->
+    <div class="col-lg-3 d-none d-lg-block">
+      <div class="glass-sidebar glass-rounded-lg shadow-sm">
+        <h5 class="glass-h6 px-3 mb-3 glass-uppercase text-muted">Core Library</h5>
+        <a [routerLink]="[]" [fragment]="'typography'" class="glass-sidebar-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true, fragment: 'ignored'}"><i class="bi bi-type"></i> Typography</a>
+        <a [routerLink]="[]" [fragment]="'buttons'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-hand-index-thumb"></i> Buttons</a>
+        <a [routerLink]="[]" [fragment]="'badges'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-tag"></i> Badges & Tags</a>
+        <a [routerLink]="[]" [fragment]="'cards'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-layers"></i> Cards & Surfaces</a>
+        <a [routerLink]="[]" [fragment]="'forms'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-input-cursor-text"></i> Form Controls</a>
+        <a [routerLink]="[]" [fragment]="'feedback'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-chat-dots"></i> Feedback & Alerts</a>
+        <a [routerLink]="[]" [fragment]="'data'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-table"></i> Data & Lists</a>
+        <a [routerLink]="[]" [fragment]="'navigation'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-compass"></i> Navigation</a>
+        <a [routerLink]="[]" [fragment]="'media'" class="glass-sidebar-link" routerLinkActive="active"><i class="bi bi-image"></i> Media & Progress</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9">
+      
+      <!-- 1. TYPOGRAPHY -->
+      <section id="typography" class="mb-5">
+        <app-glass-card [elevated]="true" class="mb-4">
+          <h2 class="glass-h2 mb-4">1. Typography & Colors</h2>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <h1 class="glass-h1">Heading 1</h1>
+              <h3 class="glass-h3 glass-gradient-text">Gradient Title</h3>
+            </div>
+            <div class="col-md-6">
+              <p class="glass-text-lg">Large informative text.</p>
+              <p class="glass-text-muted">Muted secondary text.</p>
+            </div>
+          </div>
+          <div class="glass-code-block">
+            <pre><code>&lt;h1 class="glass-h1"&gt;Heading 1&lt;/h1&gt;
+&lt;h3 class="glass-h3 glass-gradient-text"&gt;Gradient Title&lt;/h3&gt;
+&lt;p class="glass-text-lg"&gt;Large informative text.&lt;/p&gt;
+&lt;p class="glass-text-muted"&gt;Muted secondary text.&lt;/p&gt;</code></pre>
+          </div>
+        </app-glass-card>
+      </section>
+
+      <!-- 2. BUTTONS -->
+      <section id="buttons" class="mb-5">
+        <app-glass-card [elevated]="true" class="mb-4">
+          <h2 class="glass-h2 mb-4">2. Buttons</h2>
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <app-glass-button variant="primary">Primary</app-glass-button>
+            <app-glass-button variant="success">Success</app-glass-button>
+            <app-glass-button variant="outline">Outline</app-glass-button>
+            <app-glass-button variant="ghost">Ghost</app-glass-button>
+          </div>
+          <div class="glass-code-block">
+            <pre><code>&lt;button class="glass-btn"&gt;Primary&lt;/button&gt;
+&lt;button class="glass-btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="glass-btn glass-btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="glass-btn glass-btn-ghost"&gt;Ghost&lt;/button&gt;</code></pre>
+          </div>
+        </app-glass-card>
+      </section>
+
+      <!-- 4. CARDS & SURFACES -->
+      <section id="cards" class="mb-5">
+        <app-glass-card [elevated]="true" class="mb-4">
+          <h2 class="glass-h2 mb-4">3. Cards & Surfaces</h2>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="glass-card">Standard Card</div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass-card glass-elevated glass-glow-primary">Elevated Glow</div>
+            </div>
+          </div>
+          <div class="glass-code-block">
+            <pre><code>&lt;!-- Standard --&gt;
+&lt;div class="glass-card"&gt;Standard Card&lt;/div&gt;
+
+&lt;!-- Elevated with Primary Glow --&gt;
+&lt;div class="glass-card glass-elevated glass-glow-primary"&gt;Elevated Glow&lt;/div&gt;</code></pre>
+          </div>
+        </app-glass-card>
+      </section>
+
+      <!-- 5. FORM CONTROLS -->
+      <section id="forms" class="mb-5">
+        <app-glass-card [elevated]="true" class="mb-4">
+          <h2 class="glass-h2 mb-4">4. Form Controls</h2>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="glass-form-group">
+                <label class="glass-label">Full Name</label>
+                <input type="text" class="glass-input" placeholder="Enter name...">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass-form-group">
+                <label class="glass-label">Search Roles</label>
+                <div class="position-relative">
+                  <input type="text" class="glass-input ps-5" placeholder="Search...">
+                  <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ps-3 text-muted"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glass-code-block">
+            <pre><code>&lt;!-- Standard Input --&gt;
+&lt;div class="glass-form-group"&gt;
+  &lt;label class="glass-label"&gt;Full Name&lt;/label&gt;
+  &lt;input type="text" class="glass-input" placeholder="Enter name..."&gt;
+&lt;/div&gt;
+
+&lt;!-- Input with Icon --&gt;
+&lt;div class="glass-form-group"&gt;
+  &lt;label class="glass-label"&gt;Search&lt;/label&gt;
+  &lt;div class="position-relative"&gt;
+    &lt;input type="text" class="glass-input ps-5" placeholder="Search..."&gt;
+    &lt;i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ps-3 text-muted"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </app-glass-card>
+      </section>
+
+      <!-- 6. FEEDBACK -->
+      <section id="feedback" class="mb-5">
+        <app-glass-card [elevated]="true" class="mb-4">
+          <h2 class="glass-h2 mb-4">5. Feedback & Alerts</h2>
+          <div class="glass-alert glass-alert-success mb-4">
+            <i class="bi bi-check-circle-fill me-2"></i> Success Alert Message
+          </div>
+          <div class="glass-code-block">
+            <pre><code>&lt;div class="glass-alert glass-alert-success"&gt;
+  &lt;i class="bi bi-check-circle-fill me-2"&gt;&lt;/i&gt; Success Alert Message
+&lt;/div&gt;</code></pre>
+          </div>
+        </app-glass-card>
+      </section>
+
+      <!-- Utility Info -->
+      <div class="glass-panel text-center py-5">
+        <i class="bi bi-rocket-takeoff glass-h1 glass-gradient-text d-block mb-3"></i>
+        <h4 class="glass-h4">Ready for Production</h4>
+        <p class="glass-text-sm text-muted max-w-lg mx-auto">This style guide is generated dynamically from your <code>_glass.scss</code> framework. You can host this Angular app to serve as your project's live documentation.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
