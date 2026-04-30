@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
@@ -25,6 +25,7 @@ import { GlassAlertComponent } from '../glass-alert/glass-alert.component';
     NgIf,
     NgForOf,
     FormsModule,
+    RouterLink,
     PaginationComponent,
     LoadingSpinnerComponent,
     GlassButtonComponent,

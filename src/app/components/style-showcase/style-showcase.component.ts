@@ -9,6 +9,9 @@ import { GlassAlertComponent } from '../glass-alert/glass-alert.component';
 import { GlassSelectComponent, GlassSelectOption } from '../glass-select/glass-select.component';
 
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ZardButtonComponent } from '@/shared/components/button/button.component';
 
 @Component({
   selector: 'app-style-showcase',
@@ -23,7 +26,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     GlassBadgeComponent,
     GlassInputComponent,
     GlassAlertComponent,
-    GlassSelectComponent
+    GlassSelectComponent,
+    MatButtonModule,
+    MatIconModule,
+    ZardButtonComponent
   ],
   templateUrl: './style-showcase.component.html',
   styleUrl: './style-showcase.component.scss'

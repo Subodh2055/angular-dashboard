@@ -161,88 +161,99 @@
       </div>
     </div>
     
-    <!-- Button Showcase Section -->
+    <!-- Framework Documentation Guide Section -->
     <div class="row mt-5">
       <div class="col-12">
-        <div class="glass-card p-4 glass-animate glass-animate-5">
-          <h3 class="glass-h4 mb-4 glass-gradient-text">NexBodh Component Showcase</h3>
-          
-          <div class="mb-5">
-            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Reusable Angular Components</h5>
-            
-            <div class="mb-4">
-              <h6 class="glass-text-xs text-muted mb-2">BUTTONS</h6>
-              <div class="d-flex flex-wrap gap-3">
-                <app-glass-button variant="primary" [animate]="true">Primary</app-glass-button>
-                <app-glass-button variant="success">Success</app-glass-button>
-                <app-glass-button variant="warning">Warning</app-glass-button>
-                <app-glass-button variant="error">Danger</app-glass-button>
-                <app-glass-button variant="outline" size="sm">Small Outline</app-glass-button>
-                <app-glass-button variant="ghost" [iconOnly]="true"><i class="bi bi-gear-fill"></i></app-glass-button>
+        <div class="mb-4 text-center">
+          <h2 class="glass-h2 glass-gradient-text">NexBodh Framework Guide</h2>
+          <p class="glass-text-secondary">Explore the documentation and interactive showcases for each integrated library.</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- NexBodh Card -->
+          <div class="col-md-6 col-lg-3">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-1" routerLink="/showcase">
+              <div class="text-center py-3">
+                <i class="bi bi-palette-fill glass-h1 text-primary d-block mb-3"></i>
+                <h5 class="glass-h5 mb-2">NexBodh Custom</h5>
+                <p class="glass-text-xs text-muted mb-4">Core glassmorphism design system and custom Angular components.</p>
+                <button class="glass-btn glass-btn-sm glass-btn-primary glass-btn-block">Explore Core</button>
               </div>
-            </div>
-
-            <div class="mb-4">
-              <h6 class="glass-text-xs text-muted mb-2">BADGES</h6>
-              <div class="d-flex flex-wrap gap-2">
-                <app-glass-badge variant="primary">Primary</app-glass-badge>
-                <app-glass-badge variant="success" [pill]="true">Success Pill</app-glass-badge>
-                <app-glass-badge variant="warning">Warning</app-glass-badge>
-                <app-glass-badge variant="error">Error</app-glass-badge>
-                <app-glass-badge variant="info">Info</app-glass-badge>
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h6 class="glass-text-xs text-muted mb-2">ALERTS</h6>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <app-glass-alert variant="success" title="Success!" icon="bi bi-check-circle-fill">
-                    Your changes have been saved.
-                  </app-glass-alert>
-                </div>
-                <div class="col-md-6">
-                  <app-glass-alert variant="info" title="Note" icon="bi bi-info-circle-fill">
-                    New dashboard theme is active.
-                  </app-glass-alert>
-                </div>
-              </div>
-            </div>
+            </app-glass-card>
           </div>
 
-          <div class="mb-5">
-            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Glass Cards</h5>
-            <div class="row g-4">
-              <div class="col-md-4">
-                <app-glass-card [elevated]="true" glow="primary">
-                  <h6 class="glass-h6">Elevated Card</h6>
-                  <p class="glass-text-sm text-muted">With primary glow and elevated depth.</p>
-                </app-glass-card>
+          <!-- Tailwind Card -->
+          <div class="col-md-6 col-lg-3">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-2" routerLink="/showcase/tailwind">
+              <div class="text-center py-3">
+                <i class="bi bi-wind glass-h1 text-info d-block mb-3"></i>
+                <h5 class="glass-h5 mb-2">Tailwind CSS</h5>
+                <p class="glass-text-xs text-muted mb-4">Utility-first CSS framework for rapid UI development and layout.</p>
+                <button class="glass-btn glass-btn-sm glass-btn-info glass-btn-block">View Utilities</button>
               </div>
-              <div class="col-md-4">
-                <app-glass-card [compact]="true">
-                  <h6 class="glass-h6">Compact Card</h6>
-                  <p class="glass-text-sm text-muted">Less padding for tighter layouts.</p>
-                </app-glass-card>
-              </div>
-              <div class="col-md-4">
-                <app-glass-card [animate]="true" [animationDelay]="3">
-                  <h6 class="glass-h6">Animated Card</h6>
-                  <p class="glass-text-sm text-muted">Smooth fade-in animation on load.</p>
-                </app-glass-card>
-              </div>
-            </div>
+            </app-glass-card>
           </div>
 
-          <div>
-            <h5 class="glass-h6 mb-3 text-muted glass-uppercase">Direct CSS Classes</h5>
-            <div class="d-flex flex-wrap gap-3">
-              <button class="glass-btn glass-animate">Animated Primary</button>
-              <button class="glass-btn glass-btn-lg glass-glow-primary">Glowing Large</button>
-              <button class="glass-btn glass-btn-outline">Outline CSS</button>
-              <span class="glass-badge glass-badge-info">Info Badge</span>
-              <span class="glass-badge glass-badge-success">Success Badge</span>
-            </div>
+          <!-- Material Card -->
+          <div class="col-md-6 col-lg-3">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-3" routerLink="/showcase/material">
+              <div class="text-center py-3">
+                <i class="bi bi-google glass-h1 text-secondary d-block mb-3"></i>
+                <h5 class="glass-h5 mb-2">Angular Material</h5>
+                <p class="glass-text-xs text-muted mb-4">Google's official Material Design component library for Angular.</p>
+                <button class="glass-btn glass-btn-sm glass-btn-secondary glass-btn-block">View Material</button>
+              </div>
+            </app-glass-card>
+          </div>
+
+          <!-- ZardUI Card -->
+          <div class="col-md-6 col-lg-3">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-4" routerLink="/showcase/zardui">
+              <div class="text-center py-3">
+                <i class="bi bi-cpu-fill glass-h1 text-success d-block mb-3"></i>
+                <h5 class="glass-h5 mb-2">ZardUI (Shadcn)</h5>
+                <p class="glass-text-xs text-muted mb-4">Copy-paste component architecture for ultimate flexibility.</p>
+                <button class="glass-btn glass-btn-sm glass-btn-success glass-btn-block">View ZardUI</button>
+              </div>
+            </app-glass-card>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <!-- Icons Card -->
+          <div class="col-md-6">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-5" routerLink="/showcase/icons">
+              <div class="d-flex align-items-center p-3">
+                <div class="me-4">
+                  <i class="bi bi-patch-check-fill glass-h1 text-warning"></i>
+                </div>
+                <div>
+                  <h5 class="glass-h5 mb-1">Iconography System</h5>
+                  <p class="glass-text-xs text-muted mb-0">Unified icons from Bootstrap & Lucide for consistent visual language.</p>
+                </div>
+                <div class="ms-auto">
+                  <button class="glass-btn glass-btn-sm glass-btn-ghost"><i class="bi bi-arrow-right"></i></button>
+                </div>
+              </div>
+            </app-glass-card>
+          </div>
+
+          <!-- Forms Card -->
+          <div class="col-md-6">
+            <app-glass-card [elevated]="true" class="h-100 cursor-pointer glass-animate glass-animate-6" routerLink="/showcase/forms">
+              <div class="d-flex align-items-center p-3">
+                <div class="me-4">
+                  <i class="bi bi-ui-checks glass-h1 text-error"></i>
+                </div>
+                <div>
+                  <h5 class="glass-h5 mb-1">Advanced Form Systems</h5>
+                  <p class="glass-text-xs text-muted mb-0">Complex validation patterns and custom reactive form controls.</p>
+                </div>
+                <div class="ms-auto">
+                  <button class="glass-btn glass-btn-sm glass-btn-ghost"><i class="bi bi-arrow-right"></i></button>
+                </div>
+              </div>
+            </app-glass-card>
           </div>
         </div>
       </div>

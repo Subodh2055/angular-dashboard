@@ -1462,6 +1462,33 @@ body {
   box-shadow: 0 6px 24px rgba(0, 102, 255, 0.28);
 }
 
+/* ---------- 7.1 DROPDOWNS ---------- */
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 102, 255, 0.10);
+  border-radius: var(--glass-radius);
+  box-shadow: 0 12px 40px rgba(0, 102, 255, 0.15);
+  margin-top: 0.5rem !important;
+  padding: 0.5rem;
+}
+
+.glass-dropdown .dropdown-item {
+  border-radius: calc(var(--glass-radius) * 0.5);
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--glass-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.glass-dropdown .dropdown-item:hover {
+  background: rgba(0, 102, 255, 0.08);
+  color: var(--glass-primary);
+  transform: translateX(4px);
+}
+
 /* ---------- 8. BADGES / TAGS / STATUS ---------- */
 .glass-badge {
   display: inline-flex;
@@ -1588,7 +1615,7 @@ body {
 .glass-textarea:focus,
 .glass-select:focus {
   border-color: var(--glass-primary);
-  box-shadow: 
+  box-shadow:
     0 0 0 4px rgba(0, 102, 255, 0.08),
     inset 0 2px 4px rgba(0, 102, 255, 0.03);
   background: #fff;

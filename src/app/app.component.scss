@@ -1,38 +1,50 @@
-:host {
+.app-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-size: cover;
+  background: #F8FAFC;
 }
 
-.glass-navbar {
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 0 0 12px 12px;
-  transition: all 0.3s ease;
-
-  .navbar-brand, .nav-link, .navbar-text {
-    color: deepskyblue !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-link.active {
-    font-weight: 600;
-    text-decoration: underline;
-  }
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
-.main-content {
-  flex: 1 0 auto;
-  padding: 2rem 1rem;
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: calc(100vh - 70px);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
 }
 
-.glass-footer {
-  background-color: rgba(255, 255, 255, 0.15);
+.content-wrapper {
+  flex: 1;
+}
+
+.app-footer {
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 12px 12px 0 0;
+}
+
+.hover-primary:hover {
+  color: var(--glass-primary) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 102, 255, 0.2);
 }

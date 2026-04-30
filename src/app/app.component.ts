@@ -1,11 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {JsonPipe} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { JsonPipe } from "@angular/common";
+import { HeaderComponent } from './components/layout/header.component';
+import { SidebarComponent } from './components/layout/sidebar.component';
+import { RightPanelComponent } from './components/layout/right-panel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLinkActive, RouterLink, JsonPipe],
+  imports: [
+    RouterOutlet, 
+    RouterLinkActive, 
+    RouterLink, 
+    JsonPipe,
+    HeaderComponent,
+    SidebarComponent,
+    RightPanelComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

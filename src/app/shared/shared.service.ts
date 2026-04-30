@@ -5,16 +5,33 @@ import {ToastMessageService} from "../services/toast-message.service";
 import {Alert, AlertType} from "../models/alert";
 import {LocalStorage, LocalStorageUtil} from "./utill/local-storage-util";
 
+import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
-  // storage: LocalStorage = LocalStorageUtil.getStorage();
+  private sidebarCollapsed = new BehaviorSubject<boolean>(false);
+  isSidebarCollapsed$ = this.sidebarCollapsed.asObservable();
+
+  private rightPanelOpen = new BehaviorSubject<boolean>(false);
+  isRightPanelOpen$ = this.rightPanelOpen.asObservable();
 
   constructor(
     private router: Router,
     private toastMessage: ToastMessageService
-  ) {
+  ) { }
+
+  toggleSidebar() {
+    this.sidebarCollapsed.next(!this.sidebarCollapsed.value);
+  }
+
+  toggleRightPanel() {
+    this.rightPanelOpen.next(!this.rightPanelOpen.value);
+  }
+
+  setSidebarCollapsed(collapsed: boolean) {
+    this.sidebarCollapsed.next(collapsed);
   }
   public getServerErrorMessage(error: any) {
     console.warn(error?.code);

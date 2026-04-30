@@ -23,6 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
           [disabled]="disabled"
           class="glass-input"
           [class.glass-rounded-full]="rounded"
+          [class.glass-input-error]="hasError"
           [(ngModel)]="value"
           (input)="onInputChange($event)"
           (blur)="onBlur()"
@@ -37,6 +38,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
   `,
   styles: [`
     .glass-input.glass-rounded-full { padding-left: 3rem !important; }
+    .glass-input-error { border-color: #E62E4D !important; box-shadow: 0 0 0 4px rgba(230, 46, 77, 0.1) !important; }
   `]
 })
 export class GlassInputComponent implements ControlValueAccessor {
@@ -45,6 +47,7 @@ export class GlassInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() hint: string = '';
   @Input() error: string = '';
+  @Input() hasError: boolean = false;
   @Input() icon: string = '';
   @Input() rounded: boolean = false;
   @Input() disabled: boolean = false;

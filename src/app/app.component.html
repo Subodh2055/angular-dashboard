@@ -1,62 +1,34 @@
-<!-- ================= HEADER ================= -->
-<header class="glass-sticky glass-top-0 glass-z-sticky p-3">
-  <nav class="glass-nav shadow-sm px-3">
-    <div class="container-fluid">
-      <!-- Brand -->
-      <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/users">
-        <i class="bi bi-people-fill me-2"></i>
-        {{ title }}
-      </a>
+<div class="app-layout">
+  <!-- Top Header -->
+  <app-header [title]="title"></app-header>
 
-      <!-- Toggler for responsive -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="app-body">
+    <!-- Left Sidebar -->
+    <app-sidebar></app-sidebar>
 
-      <!-- Navigation Items -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav gap-2">
-          <li class="nav-item">
-            <a class="glass-nav-link" routerLink="/users" routerLinkActive="active">
-              <i class="bi bi-people me-1"></i> Users
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="glass-nav-link" routerLink="/showcase" routerLinkActive="active">
-              <i class="bi bi-palette me-1"></i> Design System
-            </a>
-          </li>
-        </ul>
+    <!-- Main Content Area -->
+    <div class="main-container">
+      <main class="content-wrapper p-4">
+        <router-outlet></router-outlet>
+      </main>
 
-        <!-- Version Info -->
-        <span class="navbar-text ms-3 small text-light opacity-75">
-          v{{ version }}
-        </span>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<!-- ================= BODY ================= -->
-<main class="main-content flex-fill py-4">
-  <div class="p-2">
-    <router-outlet></router-outlet>
-  </div>
-</main>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer py-5 mt-auto">
-  <div class="glass-container">
-    <div class="glass-panel glass-rounded-lg p-4">
-      <div class="row align-items-center">
-        <div class="d-flex justify-content-center text-center">
-          <p class="mb-0 glass-text-secondary">
-            <i class="bi bi-c-circle me-1"></i>
-            {{ date.getFullYear() }} {{ title }}. Built with ❤️ by <strong class="glass-gradient-text">Subodh Bhandari.</strong>
-          </p>
+      <!-- Page Footer -->
+      <footer class="app-footer py-4 border-top border-light border-opacity-10 mt-auto">
+        <div class="container-fluid">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0 glass-text-xs text-muted">
+              &copy; {{ date.getFullYear() }} {{ title }}. All rights reserved.
+            </p>
+            <div class="footer-links d-flex gap-3">
+              <a href="#" class="glass-text-xs text-muted text-decoration-none hover-primary">Privacy Policy</a>
+              <a href="#" class="glass-text-xs text-muted text-decoration-none hover-primary">Terms of Service</a>
+            </div>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   </div>
-</footer>
+
+  <!-- Right Sidebar / Control Panel -->
+  <app-right-panel></app-right-panel>
+</div>
